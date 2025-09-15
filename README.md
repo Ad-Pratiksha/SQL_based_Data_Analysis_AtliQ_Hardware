@@ -41,8 +41,6 @@ GROUP BY c.market<br>
 ORDER BY net_sales_mln DESC<br>
 LIMIT 10;<br>
 
-![Dashboard Screenshot]((https://github.com/Ad-Pratiksha/SQL_based_Data_Analysis_AtliQ_Hardware/blob/main/Top_10%20markets%20by%20net%20sales.png).png)
-
 ### 🔹 Customer Analysis<br>
 •	Segmented customers into High (28%) / Medium (32%) / Low (40%) value.<br>
 •	Medium-value customers offer the largest growth opportunity.<br>
