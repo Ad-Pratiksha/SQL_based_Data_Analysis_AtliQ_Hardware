@@ -41,6 +41,8 @@ GROUP BY c.market<br>
 ORDER BY net_sales_mln DESC<br>
 LIMIT 10;<br>
 
+![Dashboard Screenshot](Top_10 markets by net sales.png)
+
 ### 🔹 Customer Analysis<br>
 •	Segmented customers into High (28%) / Medium (32%) / Low (40%) value.<br>
 •	Medium-value customers offer the largest growth opportunity.<br>
