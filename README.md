@@ -41,7 +41,7 @@ GROUP BY c.market<br>
 ORDER BY net_sales_mln DESC<br>
 LIMIT 10;<br>
 
-![Dashboard Screenshot](images/Top_10 markets by net sales.png)
+![image alt](https://github.com/Ad-Pratiksha/SQL_based_Data_Analysis_AtliQ_Hardware/blob/a7ab8ebd5f9067b757b04a4d4f94c80a08f5cf27/Images/Top_10%20markets%20by%20net%20sales.png)
 
 
 ### 🔹 Customer Analysis<br>
