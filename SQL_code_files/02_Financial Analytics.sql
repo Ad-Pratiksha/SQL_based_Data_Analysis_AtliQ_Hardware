@@ -1,0 +1,122 @@
+### Financial Analytics ###
+
+-- Create a function to get fiscal year by passing the date
+#	CREATE FUNCTION `get_fiscal_year`(calendar_date DATE)
+#	RETURNS int
+#	DETERMINISTIC
+#	BEGIN
+#	DECLARE fiscal_year INT;
+#	SET fiscal_year = YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH));
+#	RETURN fiscal_year;
+#	END
+
+-- Get all the sales transaction data for Croma India (customer_code: 90002002) in fiscal year 2021
+SELECT * FROM fact_sales_monthly
+WHERE
+customer_code=90002002 AND
+get_fiscal_year(date)=2021
+ORDER BY date asc
+LIMIT 100000;
+
+-- Perform joins to pull product information
+SELECT s.date, s.product_code, p.product, p.variant, s.sold_quantity
+FROM fact_sales_monthly s
+JOIN dim_product p
+ON s.product_code=p.product_code
+WHERE
+customer_code=90002002 AND
+get_fiscal_year(date)=2021
+LIMIT 1000000;
+
+-- Performing join with 'fact_gross_price' table and generating required fields
+SELECT
+s.date,
+s.product_code,
+p.product,
+p.variant,
+s.sold_quantity,
+g.gross_price,
+ROUND(s.sold_quantity*g.gross_price,2) as gross_price_total
+FROM fact_sales_monthly s
+JOIN dim_product p
+ON s.product_code=p.product_code
+JOIN fact_gross_price g
+ON g.fiscal_year=get_fiscal_year(s.date)
+AND g.product_code=s.product_code
+WHERE
+customer_code=90002002 AND
+get_fiscal_year(s.date)=2021
+LIMIT 1000000;
+
+-- Generate monthly gross sales report for Croma India for all the years
+SELECT
+s.date,
+s.fiscal_year,
+SUM(ROUND(s.sold_quantity*g.gross_price,2)) as monthly_sales
+FROM fact_sales_monthly s
+JOIN fact_gross_price g
+ON g.fiscal_year=get_fiscal_year(s.date) AND g.product_code=s.product_code
+WHERE
+customer_code=90002002
+GROUP BY date;
+
+-- Generate monthly gross sales report for any customer using stored procedure
+#	CREATE PROCEDURE `get_monthly_gross_sales_for_customer`(
+#	in_customer_codes TEXT
+#	)
+#	BEGIN
+#	SELECT
+#	s.date,
+#	SUM(ROUND(s.sold_quantity*g.gross_price,2)) as gross_price_total
+#	FROM fact_sales_monthly s
+#	JOIN fact_gross_price g
+#	ON g.fiscal_year=get_fiscal_year(s.date)
+#	AND g.product_code=s.product_code
+#	WHERE
+#	FIND_IN_SET(s.customer_code, in_customer_codes) > 0
+#	GROUP BY s.date
+#	ORDER BY s.date DESC;
+#	END
+
+-- Write a stored proc that can retrieve market badge
+#	CREATE PROCEDURE `get_market_badge`(
+#	IN in_market VARCHAR(45),
+#	IN in_fiscal_year YEAR,
+#	OUT out_badge VARCHAR(45)
+#	)
+#	BEGIN
+#	DECLARE qty INT DEFAULT 0;
+#	--Default market is India
+#	IF in_market = "" THEN
+#	SET in_market="India";
+#	END IF;
+#	--Retrieve total sold quantity for a given market in a given year
+#	SELECT
+#	SUM(s.sold_quantity) INTO qty
+#	FROM fact_sales_monthly s
+#	JOIN dim_customer c
+#	ON s.customer_code=c.customer_code
+#	WHERE
+#	get_fiscal_year(s.date)=in_fiscal_year AND
+#	c.market=in_market;
+#	--Determine Gold vs Silver status
+#	IF qty > 5000000 THEN
+#	SET out_badge = 'Gold';
+#	ELSE
+#	SET out_badge = 'Silver';
+#	END IF;
+#	END
+
+-- Generate a yearly report for Croma India with fiscal year and total gross sales
+select
+get_fiscal_year(date) as fiscal_year,
+sum(round(sold_quantity*g.gross_price,2)) as yearly_sales
+from fact_sales_monthly s
+join fact_gross_price g
+on
+g.fiscal_year=get_fiscal_year(s.date) and
+g.product_code=s.product_code
+where
+customer_code=90002002
+group by get_fiscal_year(date)
+order by fiscal_year;
