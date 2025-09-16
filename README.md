@@ -23,8 +23,9 @@ This project demonstrates how SQL-driven analysis can generate actionable insigh
 •	Period: FY2017 – FY2022<br>
 •	Key Metrics: sold_quantity, gross_price, net_sales, forecast_accuracy<br>
 
-Find below the ERD of the Database:
-![image alt](https://github.com/Ad-Pratiksha/SQL_based_Data_Analysis_AtliQ_Hardware/blob/fa8f0e64a8e8b850aca66b717e4e23f7c87bcf76/Images/ERD_AtliQ_Hardware_Database.png)
+Find below the ERD of the Database:<br>
+
+<image src="./Images/ERD_AtliQ_Hardware_Database.png" width=600 height=800>
 
 ## 📊 Key Analyses
 
@@ -44,7 +45,7 @@ GROUP BY c.market<br>
 ORDER BY net_sales_mln DESC<br>
 LIMIT 10;<br>
 
-![image alt](https://github.com/Ad-Pratiksha/SQL_based_Data_Analysis_AtliQ_Hardware/blob/a7ab8ebd5f9067b757b04a4d4f94c80a08f5cf27/Images/Top_10%20markets%20by%20net%20sales.png)
+<image src="./Images/Top_10 markets by net sales.png" width=800 height=500>
 
 
 ### 🔹 Customer Analysis<br>
@@ -74,6 +75,8 @@ SELECT customer,<br>
 FROM customer_revenue<br>
 ORDER BY total_revenue DESC;<br>
 
+<image src="./Images/Customer segmentation by revenue contribution.png" width=700 height=400>
+
 ### 🔹 Product Analysis<br>
 •	Computer peripherals (Mouse & Keyboards) lead sales (~70M units).<br>
 •	Storage devices & high-performance components show strong demand.<br>
@@ -88,6 +91,8 @@ JOIN dim_product p ON s.product_code = p.product_code<br>
 GROUP BY p.product<br>
 ORDER BY qty_sold_mln DESC<br>
 LIMIT 10;<br>
+
+<image src="./Images/Top 10 products by qty sold.png" width=800 height=500>
 
 ### 🔹 India Market Deep Dive<br>
 •	E-Commerce dominates (Amazon ₹240M+, Flipkart ₹108M).<br>
@@ -108,6 +113,8 @@ GROUP BY c.customer, c.platform<br>
 ORDER BY revenue_inr_mln DESC<br>
 LIMIT 10;<br>
 
+<image src="./Images/Top customers in India by revenue and platform.png" width=800 height=500>
+
 ### 🔹 Supply Chain Analysis<br>
 •	Forecast accuracy ~45% vs. 80% target → major inefficiencies.<br>
 •	Even top accounts (Amazon, Walmart) show accuracy gaps.<br>
@@ -126,6 +133,8 @@ GROUP BY c.customer<br>
 ORDER BY forecast_accuracy_pct ASC<br>
 LIMIT 10;<br>
 
+<image src="./Images/Forecast Accuracy by customer.png" width=800 height=500>
+
 ### 🔹 Comparative Market Analysis<br>
 •	India’s revenue grew ~35x (₹26M → ₹910M) between 2018–2022.<br>
 •	Other regions have larger customer bases but much lower per-customer revenue.<br>
@@ -142,6 +151,8 @@ JOIN fact_gross_price g ON s.product_code = g.product_code<br>
 GROUP BY fiscal_year<br>
 ORDER BY fiscal_year;<br>
 
+<image src="./Images/Revenue trend India vs Other Markets.png" width=800 height=500>
+
 ## 🚀 Business Impact & Recommendations<br>
 •	Prioritize India → Allocate resources to scale in a high-efficiency market.<br>
 •	Engage Medium-Value Customers → Loyalty programs & upselling campaigns.<br>
@@ -153,7 +164,6 @@ ORDER BY fiscal_year;<br>
 ## 📷 Screenshots / Visuals<br>
 The repository includes:<br>
 •	ERD of database schema<br>
-•	SQL scripts for each analysis block<br>
 •	Charts on customer segmentation, market comparison, and product trends<br>
 
 ## 📈 Project Impact<br>
