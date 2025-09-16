@@ -23,6 +23,9 @@ This project demonstrates how SQL-driven analysis can generate actionable insigh
 •	Period: FY2017 – FY2022<br>
 •	Key Metrics: sold_quantity, gross_price, net_sales, forecast_accuracy<br>
 
+Find below the ERD of the Database:
+![image alt](https://github.com/Ad-Pratiksha/SQL_based_Data_Analysis_AtliQ_Hardware/blob/fa8f0e64a8e8b850aca66b717e4e23f7c87bcf76/Images/ERD_AtliQ_Hardware_Database.png)
+
 ## 📊 Key Analyses
 
 ### 🔹 Financial Analysis<br>
