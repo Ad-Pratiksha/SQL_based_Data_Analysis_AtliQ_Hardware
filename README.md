@@ -166,6 +166,13 @@ The repository includes:<br>
 •	ERD of database schema<br>
 •	Charts on customer segmentation, market comparison, and product trends<br>
 
+## 📝 Project Files and Documentation<br>
+The repository includes:<br>
+•	pdf of the project presentation.<br>
+•	pdf containing all the sql queries performed in the analysis and insights generated after each analysis section.<br>
+•	Sample dataset from AliQ's Database (has 20 records from each table in an excel file).<br>
+•	01_Data Quality Assessment.sql ... to 07_Advance Analysis.sql files in SQL_codes folder.<br>
+
 ## 📈 Project Impact<br>
 ✔ Solved reporting gaps through segmentation & visibility<br>
 ✔ Identified revenue risks and forecasting inefficiencies<br>
